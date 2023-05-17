@@ -3,7 +3,7 @@ import datetime
 from pydantic import BaseModel, Field, validator
 from sqlalchemy.orm import Session
 
-from linker.models import Facility as fac
+from linker.models import Facility as Fac
 
 
 class Facility(BaseModel):
@@ -30,7 +30,7 @@ def create_user(facility: Facility):
     # db_facility = Facility(index=facility.index, sort=facility.sort, address=facility.address,
     #                        description=facility.description, status=facility.status)
     print("db_facility:", type(facility), facility)
-    aa = fac(**facility.dict())
+    aa = Fac(**facility.dict())
     print("db_facility:", type(aa), aa)
     Session().add(aa)
     # a = Facility(**facility.dict())
