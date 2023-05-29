@@ -5,12 +5,13 @@ import peewee
 from database_peewee.database_peewee import p_db
 
 
-class Facility(peewee.Model):
-    index = peewee.CharField(unique=True, index=True)
-    sort = peewee.CharField(index=True)
-    address = peewee.CharField()
-    description = peewee.CharField()
-    status = peewee.IntegerField(index=True, default=1)
+class User(peewee.Model):
+    username = peewee.CharField(unique=True, index=True)
+    password = peewee.CharField(index=True)
+    phone = peewee.CharField(default='')
+    description = peewee.CharField(default='')
+    status = peewee.IntegerField(index=True, default=0)  # 0正常，1注销
+    u_type = peewee.IntegerField(index=True, default=0)  # 0普通用户，1后台用户
     update_time = peewee.DateTimeField(default=datetime.datetime.now)
 
     @staticmethod
@@ -23,9 +24,9 @@ class Facility(peewee.Model):
 
     class Meta:
         database = p_db
-        db_table = 'facility'
+        db_table = 'user'
 
 
 p_db.connect()
-p_db.create_tables([Facility])
+p_db.create_tables([User])
 p_db.close()

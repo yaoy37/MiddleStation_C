@@ -9,12 +9,14 @@ from starlette.requests import Request
 
 from common.exceptions import UnicornException, unicorn_exception_handler, ApiException
 from linker.view import linker_router
+from users.view import user_router
 
 CURRENT_PROJECT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def setup_routers(app: FastAPI):
     app.include_router(linker_router, prefix="/linker", tags=["外部设备"])
+    app.include_router(user_router, prefix="/user", tags=["用户中心"])
 
     logging.info("*********** 模块URI注册完成 ****************")
 

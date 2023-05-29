@@ -27,22 +27,22 @@ def update_facility_peewee(fac: schemas.Facility):
     :return:
     """
     print("update_facility_peewee:", type(fac), fac)
-    _obj = models_peewee.Facility_v1.select().where(models_peewee.Facility_v1.index == fac.index).first()
+    _obj = models_peewee.Facility.select().where(models_peewee.Facility.index == fac.index).first()
     print(_obj)
     if _obj:
         up_data = fac.dict()
         up_data.pop("index")
-        models_peewee.Facility_v1.update(up_data).where(models_peewee.Facility_v1.index == fac.index).execute()
+        models_peewee.Facility.update(up_data).where(models_peewee.Facility.index == fac.index).execute()
     else:
-        n_m = models_peewee.Facility_v1(**fac.dict())
+        n_m = models_peewee.Facility(**fac.dict())
         n_m.save()
 
 
 if __name__ == '__main__':
     # a = list(models_peewee.FacilityV1.filter(models_peewee.FacilityV1.index == "A0:20:A6:23:83:96"))
     # a = models_peewee.FacilityV1.filter(models_peewee.FacilityV1.index == "swewe").first()
-    a = list(models_peewee.Facility_v1.select().where(models_peewee.Facility_v1.index == "A0:20:A6:23:83:96"))
-    a = models_peewee.Facility_v1.select()
+    a = list(models_peewee.Facility.select().where(models_peewee.Facility.index == "A0:20:A6:23:83:96"))
+    a = models_peewee.Facility.select()
     print(list(a))
     for i in a:
         print(i.index, i.description)
