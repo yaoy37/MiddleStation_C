@@ -1,4 +1,5 @@
 import datetime
+import uuid
 
 import peewee
 
@@ -25,6 +26,11 @@ class User(peewee.Model):
     class Meta:
         database = p_db
         db_table = 'user'
+
+
+class UserSession(peewee):
+    id = peewee.UUIDField(primary_key=True, default=uuid.uuid4)
+
 
 
 p_db.connect()
